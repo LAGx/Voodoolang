@@ -1,0 +1,63 @@
+
+
+
+
+
+
+namespace GuessNumberGame{
+
+  struct GameSettings{
+    Int guessTryAmount = 0;
+    Int maxPossibleNumber = 0;
+    Int minPossibleNumber = 0;
+  };
+
+  struct Hardness{
+    
+  };
+
+  GameSettings generateRandomGameSettings(const GameHardness hardness){
+
+  }
+
+  Bool executeGame(const GameSettings parameters){
+
+    Int numberToGuess = svl:random:generate<int>(parameters.minPossibleNumber, parameters.maxPossibleNumber);
+    Bool isSuccess = false;
+
+    svl:InOut:write("Try to guess numer from " + parameters.minPossibleNumber + " to " + parameters.maxPossibleNumber + ".");
+
+    for(Int i = 0; i < parameters.guessTryAmount; i += 1){
+
+      svl:InOut:write("Attempt #" + i + ". Try guess number: ");
+      String line = svl:InOut:readLine();
+
+      Int userNumber;
+      Bool result = tryParse<int>(line, userNumber);
+
+      if(result == false){
+        svl:InOut:write("\"" + line + "\" is not a number. try again");
+        i -= 1;
+        continue;
+      }
+
+      if(userNumber == numberToGuess){
+        svl:InOut:write("You are win!");
+        isSuccess = true;
+        break;
+      }else{
+        svl:InOut:write("You are wrong(");
+      }
+
+    }
+
+    return isSuccess;
+  }
+
+
+
+}
+
+
+GuessNumberGame:GameSettings settings = GuessNumberGame:generateRandomGameSettings(GuessNumberGame);
+GuessNumberGame:executeGame(settings);
