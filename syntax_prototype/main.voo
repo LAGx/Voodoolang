@@ -7,13 +7,15 @@
 namespace GuessNumberGame{
 
   struct GameSettings{
-    Int guessTryAmount = 0;
-    Int maxPossibleNumber = 0;
-    Int minPossibleNumber = 0;
+    Int guessTryAmount = Int(0);
+    Int maxPossibleNumber = Int(0);
+    Int minPossibleNumber = Int(0);
   };
 
-  struct Hardness{
-    
+  namespace Hardness{
+    const Int easy = Int(1);
+    const Int normal = Int(2);
+    const Int hard = Int(3);
   };
 
   GameSettings generateRandomGameSettings(const GameHardness hardness){
@@ -23,9 +25,9 @@ namespace GuessNumberGame{
   Bool executeGame(const GameSettings parameters){
 
     Int numberToGuess = svl:random:generate<int>(parameters.minPossibleNumber, parameters.maxPossibleNumber);
-    Bool isSuccess = false;
+    Bool isSuccess = Bool(false);
 
-    svl:InOut:write("Try to guess numer from " + parameters.minPossibleNumber + " to " + parameters.maxPossibleNumber + ".");
+    svl:InOut:write(String("Try to guess numer from ") + String:convert(parameters.minPossibleNumber) + " to " + parameters.maxPossibleNumber + ".");
 
     for(Int i = 0; i < parameters.guessTryAmount; i += 1){
 
@@ -61,3 +63,100 @@ namespace GuessNumberGame{
 
 GuessNumberGame:GameSettings settings = GuessNumberGame:generateRandomGameSettings(GuessNumberGame);
 GuessNumberGame:executeGame(settings);
+
+
+//////////////////////////////////////////////////////////////////////////////
+
+Voodoo - любой код, состоящий из:
+
+
+
+Voodoo a{
+
+}
+
+
+struct Int{};
+
+Int Int(123){
+
+}
+
+Int operator+(Int one, Int two){
+
+}
+
+// c11
+
+	int operator_plus(int a, int b){
+		return a+b;
+	}
+
+
+	struct Car{
+		int wheel_radius = 0;
+		float weight = 0;
+	}
+
+
+	Car create_car(char* input){
+		return Car();
+	}
+
+	Car copy_car(Car* car){
+		return {car.wheel_radius, car.weight};
+	}
+
+
+	struct Array{
+
+	}
+
+
+
+	main{
+
+		Interpreter intpr;
+
+		intpr.compile("struct Array<T>{};");
+
+
+		intpr.compile("struct Car{};");
+		intpr.bind("Car Car(Voodoo)", create_car);
+		intpr.bind("Car operator&(Car)", copy_car);
+
+		intpr.bind("Int operator+(Int, Int)", operator_plus); // adress id/ adress
+
+	}
+
+//
+
+Void some_void = Void();
+Voodoo some_exapmle_voodoo = Voodoo(hello_***wo@#rld);
+
+Car hello = Car(some_exapmle_voodoo);
+
+
+
+#corebind
+
+
+struct SomeUserType{
+
+}
+
+
+Int number = Int(123);
+
+Int number2 = number;
+const Int number3 = &number;
+
+
+Void func(){
+	ахаха
+}
+
+
+123
+123.123
+"hello world"
